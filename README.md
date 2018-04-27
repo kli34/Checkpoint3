@@ -19,7 +19,7 @@ Business Question: From this dataset, we can answer what colleges is the best in
 
 1. -- Rank the quality_of_education from the lowest to highest in the US
 
-For Q1, we are ranking the world rank (USA) by quality of education from lowest to highest. After coding, we have our top 10 school colleges presented in the graph, they 
+For Q1, we are ranking the world rank (USA) based on quality of education (Ranking, not score) from highest to lowest. After coding, we have our top 10 colleges ordered by quality of education ASC, the lower number they have, the higher rank they've got. 
 
 ```SQL
 SELECT world_rank,quality_of_education
