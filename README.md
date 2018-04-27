@@ -77,7 +77,7 @@ ORDER BY institution DESC
 
 5.-- In the US, what schools have alumi-employment between 270 to 600
 
-
+We are trying to rank us schools based on theri alumi-employment between 270 to 600 but we only want to rank the top 10, so we only have our actual rank between 593 to 534, that means the schools on the graph do not have very good alumi-employment due to lower ranking offered by the dataset. This time, we did DESC because we must get the highest number first. The higher number they have, the lower rank they've gotten. 
 
 ```SQL
 SELECT institution, location, alumni_employment
@@ -92,6 +92,8 @@ ORDER BY alumni_employment DESC
 
 6. -- What schools have score below 60?
 
+This time, we selected school have lower score below 60 that kindly means they are not that competitive with schools that have higher ranks. Firstly, we have score from the dataset, and then we code it and selece schools below 60 out. afterward, we can order them from the highest(59.13) to the lowest(56.1) based on the graph. 
+
 ```SQL
 SELECT institution, score
 FROM datasets.world_college_ranking
@@ -103,6 +105,8 @@ ORDER BY score DESC
 
 
 7. -- What schools have broad_impact below 300?
+
+For Q7, we just want to select schools with broad impact rank below 300 that means they are on average. This time, we did not group at all, we just putted broad impact less and equal than 300 then we ordered them. Since we only do top 10, so basically the rank is between 296 to 290. 
 
 ```SQL
 SELECT institution, broad_impact
@@ -116,11 +120,13 @@ ORDER BY broad_impact DESC
 
 8. -- What is the total organized quality_of_faculty in South Korea
 
+
+
 ```SQL
-SELECT institution, broad_impact, location
+SELECT institution, influence, location
 FROM datasets.world_college_ranking
 WHERE location = 'South Korea'
-ORDER BY quality_of_faculty
+ORDER BY influence ASC
 ```
 ![Checkpoint3](Visualization/CP-8.png)
 
