@@ -118,7 +118,7 @@ ORDER BY broad_impact DESC
 ![Checkpoint3](Visualization/CP-7.png)
 
 
-8. -- What is the total organized quality_of_faculty in South Korea
+8. -- What is the rank of influence in South Korea
 
 
 
