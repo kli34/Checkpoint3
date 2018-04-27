@@ -1,7 +1,7 @@
 # Checkpoint3
 
 * Datasets: World college ranking
-* These colleges are ranked by location, national rank, quality of education, alumni employee, quality of faculty, publications, influences, citations, board impact, and patents, then it calculate a final score for ranking. 
+* These colleges are ranked by location, national rank, quality of education, alumni employee, quality of faculty, publications, influences, citations, board impact, and patents, then it calculate a final score for ranking. Every column are ranking except of the score.
 
 
 * National Rank: basically order the final score for each colleges
@@ -19,7 +19,7 @@ Business Question: From this dataset, we can answer what colleges is the best in
 
 1. -- Rank the quality_of_education from the lowest to highest in the US
 
-For Q1, we are ranking the world rank (USA) based on quality of education (Ranking, not score) from highest to lowest. After coding, we have our top 10 colleges ordered by quality of education ASC, the lower number they have, the higher rank they've got. 
+For Q1, we are ranking the world rank (USA) based on quality of education (Ranking, not score) from highest to lowest. Firstly, the dataset gave us world and quality of education. After coding, we have our top 10 colleges ordered by quality of education ASC, the lower number they have, the higher rank they've got. And then we have school with first place ranks first (Quality of education) in the world, and school with 3rd place ranks second for the quality of education. 
 
 ```SQL
 SELECT world_rank,quality_of_education
@@ -33,6 +33,8 @@ ORDER BY quality_of_education ASC
 
 2. -- Rank the world rank from the highest to lowest in UK
 
+For Q2, we want to have our world rank for British schools ranked from highest to lowest. From the dataset, we still have world rank and we also have institution grouped. While ordering the world rank, we still did ASC. And then we have Cambridge ranked the 4th place, Oxford ranked the 5th place and other 8 British schools' ranking in the graph. 
+
 ```SQL
 SELECT world_rank, institution
 FROM datasets.world_college_ranking
@@ -43,21 +45,23 @@ ORDER BY world_rank ASC
 ![Checkpoint2](Visualization/CP-2.png)
 
 
-3. -- Rank the publications based on the score between 92.8 to 100
+3. -- Rank the publications based on the score between 80 to 100
+
+We basically, we rank the publican by ordering the final score between 80 to 100 then we have our final answer that the school with score of 100 is the first place, the school with score of 96.86 is the 5th place in the world. 
 
 ```SQL
-SELECT publications,
-count(score) as n_score
+SELECT publications, score
 FROM datasets.world_college_ranking
 WHERE score between '80' and '100'
-GROUP BY publications
-ORDER BY n_score DESC
+ORDER BY score DESC
 ```
 
 ![Checkpoint2](Visualization/CP-3.png)
 
 
 4. -- What schools have citation between 100 to 300
+
+For Q4, We ranked schools based on their rank of citation, and then we have all top 10 schools ranked here, but they all have citation ranked in 278, so we count citations as w_cit to save some space, and then we have 1 showing on graph. 
 
 ```SQL
 SELECT institution, world_rank,
@@ -72,6 +76,8 @@ ORDER BY institution DESC
 
 
 5.-- In the US, what schools have alumi-employment between 270 to 600
+
+
 
 ```SQL
 SELECT institution, location, alumni_employment
