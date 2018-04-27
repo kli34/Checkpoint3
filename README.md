@@ -47,7 +47,7 @@ ORDER BY world_rank ASC
 
 3. -- Rank the publications based on the score between 80 to 100
 
-We basically, we rank the publican by ordering the final score between 80 to 100 then we have our final answer that the school with score of 100 is the first place, the school with score of 96.86 is the 5th place in the world. 
+Firstly, the data provides us publication and then we have to select score between 80 to 100 based on the question we created. We basically rank the publication by ordering the final score between 80 to 100 then we have our final answer that the school with score of 100 is the first place, the school with score of 96.86 is the 5th place in the world. 
 
 ```SQL
 SELECT publications, score
@@ -61,7 +61,7 @@ ORDER BY score DESC
 
 4. -- What schools have citation between 100 to 300
 
-For Q4, We ranked schools based on their rank of citation, and then we have all top 10 schools ranked here, but they all have citation ranked in 278, so we count citations as w_cit to save some space, and then we have 1 showing on graph. 
+For Q4, We ranked schools based on their rank of citation between 100 to 300. The dataset provides citation as main data for this question, but they all have citation ranked in 278 after coding, so we count citations as w_cit to save some space, and then we have 1 showing on graph. 
 
 ```SQL
 SELECT institution, world_rank,
