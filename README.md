@@ -120,7 +120,7 @@ ORDER BY broad_impact DESC
 
 8. -- What is the rank of influence in South Korea
 
-
+We want to know the influence rank in South Korea. From the dataset, we firstly have to find out our main location, which is Korea. Then we must order influence ASC. For the result, we have Seoul National Univ ranks 159 and Sungkyunkwan Univ ranks 299 for the influence. Basically, the top 10 schools on graph have the first 2 schools on average. 
 
 ```SQL
 SELECT institution, influence, location
@@ -130,13 +130,14 @@ ORDER BY influence ASC
 ```
 ![Checkpoint3](Visualization/CP-8.png)
 
+9. -- What is the influence rank for Japan between 100 to 309
 
-9. -- What is the influence rank for Japan
+We tried to find out Japanese school with influence rank between 100 to 309, we still point out the location first then we selece the influence rank between 100 to 309 from the dataset. After coding, we will have Tohoku Univ ranks 152 and Nagoya Univ places 163 and other 8 schools.
 
 ```SQL
 SELECT institution, location, influence
 FROM datasets.world_college_ranking
-WHERE location = 'Japan' 
+WHERE location = 'Japan' and influence between '100' and '309' 
 ORDER BY influence DESC
 ```
 
@@ -144,6 +145,8 @@ ORDER BY influence DESC
 
 
 10. -- what colleges have national rank between 15 to 270 and quality of education between 150 to 400
+
+The dataset gives us a huge amount of data and each ranking for the college. For the question, we are trying to find out any shcool with rank between 15 t0 270 and then we have code the quality of education from 150 to 400 out. Definitely, we use where function to code the data we want. Then we have the result, we have National Taiwan Normal Univ with national rank of 15 and quality of education rank of 383.
 
 ```SQL
 SELECT institution, national_rank, quality_of_education
