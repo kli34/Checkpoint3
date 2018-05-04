@@ -45,74 +45,72 @@ ORDER BY world_rank ASC
 ![Checkpoint3](Visualization/CP-2.png)
 
 
-3. -- Rank the publications based on the score between 80 to 100
+3. -- The correlation between world ranking and publication
 
-Firstly, the data provides us publication and then we have to select score between 80 to 100 based on the question we created. We basically rank the publication by ordering the final score between 80 to 100 then we have our final answer that the school with score of 100 is the first place, the school with score of 96.86 is the 5th place in the world. 
+We are comparing publicaion and world rank for top 10 schools, and then we have Harvard rank both 1st place for publication and world rank, Stanford ranks the second for world and 5th for publication. Based on the data, they do have correlation between this two ranking but it is actually no that high based on the graph because CalTech ranks 11 in the world but 82 for the publication. And Univ of Virginia ranks 40 in the world but 108 for the publication
 
 ```SQL
-SELECT publications, score
+SELECT publications, institution, world_rank
 FROM datasets.world_college_ranking
-WHERE score between '80' and '100'
-ORDER BY score DESC
+GROUP BY publications, institution, world_rank
+ORDER BY world_rank ASC
 ```
 
 ![Checkpoint3](Visualization/CP-3.png)
 
 
-4. -- What schools have citation between 100 to 300
+4. -- The correlation between world ranking and citation
 
-For Q4, We ranked schools based on their rank of citation between 100 to 300. The dataset provides citation as main data for this question, but they all have citation ranked in 278 after coding, so we count citations as w_cit to save some space, and then we have 1 showing on graph. 
+For Q4, we found out there is also strong correlation between world ranking and citation rank. We have Harvard again taking 1st place for both, and then we have UCLA ranks 15th in the world and 9th for citation. NYU ranks 19th in the world and 32nd for citation. 
 
 ```SQL
-SELECT institution, world_rank,
-    count(citations) as w_cit
+SELECT institution, world_rank, citations
 FROM datasets.world_college_ranking
-WHERE citations between '100' and '300'
-GROUP BY institution, world_rank
-ORDER BY institution DESC
+GROUP BY institution, world_rank, citations
+ORDER BY citations DESC
 ```
 
 ![Checkpoint3](Visualization/CP-4.png)
 
 
-5.-- In the US, what schools have alumi-employment between 270 to 600
+5.-- South Korea world ranking vs patents ranking
 
-We are trying to rank us schools based on theri alumi-employment between 270 to 600 but we only want to rank the top 10, so we only have our actual rank between 593 to 534, that means the schools on the graph do not have very good alumi-employment due to lower ranking offered by the dataset. This time, we did DESC because we must get the highest number first. The higher number they have, the lower rank they've gotten. 
+Korea Schools have excellent technoloy innovation although the world ranks are not that competitive with the United States but SK is the best on technology currently. 
 
 ```SQL
-SELECT institution, location, alumni_employment
+SELECT institution, patents, world_rank
 FROM datasets.world_college_ranking
-Where location = 'USA' AND alumni_employment between '270' AND '600'
-GROUP BY institution, location,alumni_employment
-ORDER BY alumni_employment DESC
+WHERE location = 'South Korea' 
+ORDER BY patents DESC
 ```
 
 ![Checkpoint3](Visualization/CP-5.png)
 
 
-6. -- What schools have score below 60?
+6. -- What regions have the high density of the top 1000 university in the world?
 
-This time, we selected school have lower score below 60 that kindly means they are not that competitive with schools that have higher ranks. Firstly, we have score from the dataset, and then we code it and selece schools below 60 out. afterward, we can order them from the highest(59.13) to the lowest(56.1) based on the graph. 
+We are looking for which countries have the most number of school from the dataset. After coding, North America (US and Canada) has the most number of colleges, and then is west Europe (Britian, Germany, and France etc). East Asia ranked the third place (China, Japan, Korea atc.)  
 
 ```SQL
-SELECT institution, score
+SELECT location,
+count(location) as c_location
 FROM datasets.world_college_ranking
-WHERE score <= '60'
-ORDER BY score DESC
+group BY location
+ORDER BY c_location DESC
 ```
 
 ![Checkpoint3](Visualization/CP-6.png)
 
 
-7. -- What schools have broad_impact below 300?
+7. -- What countries are prominent in top 10 universities in the world?
 
-For Q7, we just want to select schools with broad impact rank below 300 that means they are on average. This time, we did not group at all, we just putted broad impact less and equal than 300 then we ordered them. Since we only do top 10, so basically the rank is between 296 to 290. 
+For Q7, we are looking for what countries have schools ranked top 10, then we have USA and UK on top 10. 
 
 ```SQL
-SELECT institution, broad_impact
+SELECT institution, location, world_rank
 FROM datasets.world_college_ranking
-WHERE broad_impact <= '300'
-ORDER BY broad_impact DESC
+WHERE world_rank < '10'
+ORDER BY world_rank ASC
 ```
 
 ![Checkpoint3](Visualization/CP-7.png)
@@ -144,15 +142,17 @@ ORDER BY influence DESC
 ![Checkpoint3](Visualization/CP-9.png)
 
 
-10. -- what colleges have national rank between 15 to 270 and quality of education between 150 to 400
+10. -- How many different countries make up the top 100 universities?
 
-The dataset gives us a huge amount of data and each ranking for the college. For the question, we are trying to find out any shcool with rank between 15 t0 270 and then we have code the quality of education from 150 to 400 out. Definitely, we use where function to code the data we want. Then we have the result, we have National Taiwan Normal Univ with national rank of 15 and quality of education rank of 383.
+Firstly, the dataset gives us the location and we are trying to find out what countires does the top 100 univ include. We count location again but this time we do n_location. We set the world rank between 1 and 100. Afterward, we order the n_location desc. As a result, we still have USA with 54 colleges and then we have UK with 7 schools, and we just have few Asian school rank top 100. 
 
 ```SQL
-SELECT institution, national_rank, quality_of_education
+SELECT location,
+count(location) as n_location
 FROM datasets.world_college_ranking
-WHERE national_rank between '15' and '270' AND quality_of_education between '150' and '400'
-ORDER BY national_rank, quality_of_education DESC
+WHERE world_rank between '1' and '100'
+group BY location
+ORDER BY n_location DESC
 ```
 
 ![Checkpoint3](Visualization/CP-10.png)
